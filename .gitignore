@@ -1,0 +1,16 @@
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Dataset directories (update these names if your folders are named differently)
+dataset/
+data/
+real/
+fake/
+
+# Large model weights & cache
+*.keras
+*.h5
+__pycache__/
+.DS_Store

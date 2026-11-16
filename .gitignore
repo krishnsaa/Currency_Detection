@@ -10,7 +10,6 @@ real/
 fake/
 
 # Large model weights & cache
-*.keras
 *.h5
 __pycache__/
 .DS_Store

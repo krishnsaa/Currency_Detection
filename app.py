@@ -14,14 +14,20 @@ def load_currency_model():
 model = load_currency_model()
 class_names = ["Fake Note", "Real Note"]
 
+# Automatically read expected (height, width) from the loaded model
+input_shape = model.input_shape
+if isinstance(input_shape, list):
+    input_shape = input_shape[0]
+target_height, target_width = input_shape[1], input_shape[2]
+
 uploaded_file = st.file_uploader("Choose a currency note image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
     st.image(image, caption="Uploaded Currency Note", use_container_width=True)
 
-    # Resize to match your MobileNetV2 training input size (224x224)
-    img_resized = image.resize((224, 224))
+    # Resize to the exact dimensions expected by the model
+    img_resized = image.resize((target_width, target_height))
     img_array = np.array(img_resized, dtype=np.float32) / 255.0
     img_batch = np.expand_dims(img_array, axis=0)
 
